@@ -9,7 +9,7 @@ counter_lock = threading.Lock()
 counter = 0
 
 
-def update_counter_context(i):
+def update_counter_context():
     """
     Update the global counter and protect the transaction by acquiring a lock guarding the global counter
     :return: new value
@@ -54,9 +54,9 @@ def main():
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         log.info('creating tasks')
-        futures = [executor.submit(update_counter_context, i) for i in range(THREADS)]
+        futures = [executor.submit(update_counter_context) for i in range(THREADS)]
         log.info('tasks created')
-        for i, future  in enumerate(futures):
+        for i, future in enumerate(futures):
             # wait for future to return a value
             results[i] = future.result()
             log.info(f'task {i} returned {results[i]}')

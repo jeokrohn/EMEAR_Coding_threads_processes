@@ -9,7 +9,7 @@ counter_lock = threading.Lock()
 counter = 0
 
 
-def update_counter_context(i):
+def update_counter_context():
     """
     Update the global counter and protect the transaction by acquiring a lock guarding the global counter
     :return: new value
@@ -57,7 +57,7 @@ def main():
         # create a dictionary which allows to map from future to task
         # we need this map b/c as_completed() returns a future and we want a way to determine the task number for
         # a given future
-        future_map = {executor.submit(update_counter_context, i): i for i in range(THREADS)}
+        future_map = {executor.submit(update_counter_context): i for i in range(THREADS)}
         log.info('tasks created')
 
         # iterate over futures in order of completion

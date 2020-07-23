@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
     urls = get_field_notice_urls()
 
-    get_field_notices_sync(urls)
+    get_field_notices_sync(urls[:10])
 
     log.info('=' * 100)
     get_field_notices_threaded(urls)

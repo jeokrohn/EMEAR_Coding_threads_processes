@@ -36,7 +36,7 @@ def update_counter_context(results, slot):
     results[slot] = val
 
 
-THREADS = 10
+THREADS = 5
 
 log = logging.getLogger(__name__)
 
